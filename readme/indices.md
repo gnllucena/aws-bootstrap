@@ -121,6 +121,57 @@ Então o EV (*Enterprise Value*) será calculado utilizando a formula **EV = MC 
 EV = $ 264.533,00 + ($ 3.464,00 + $ 36.455,00) - $ 11.380,00
 EV = $ 293.072,00 
 ```
+# P/VP
+---
+>Patrimônio líquido é a soma de todos os valores do ativo de uma sociedade (pode ser uma empresa ou um fundo de investimentos, por exemplo) menos a soma de todos os seus passivos.
+Em outras palavras, para calcular o patrimônio líquido é preciso somar todos os bens e direitos, como dinheiro em caixa e imóveis, e subtrair deste valor todas as obrigações e dívidas a pagar.
+````
+P/VP = Preço da Ação / Valor Patrimonial
+`````
+P/VP é a porcentagem que a empresa vale em função do preço da ação, ou seja
+
+**Exemplo:**
+|Empresa| P/VP |
+| ------| -----|
+| CVCB3 | 2,7 |
+| OIBR3 | 0,7 |
+| MGLU3 | 18,16 |
+*Acesso em 21/07/2020*
+Então você paga 270% a mais do que a ação da CVCB3 vale
+70% do que A ação da OIBR3 vale
+e 1816% do que a ação da MGLU3 vale
+
+Em inglês, P/VP tem o nome de: **Price to Book Value** que é definida como P/B
+````
+Book Value = Assets - Liabilities
+````
+Book Value também pode ser chamada de:
+* *shareholder's equity*
+* *stockholder's equity*
+
+Agora vamos calcular o Book Value per Share (BVPS)
+````
+BVPS ou B = stockholders' equity / Outstanding shares (diluted)
+````
+Agora finalmente poderemos calcular o P/B
+````
+P/B = Preço da Ação / B
+````
+
+| Empresa         | Stockholders’ equity    | Shares        | BVPS   | Preço         | P/B Calculado | P/B Guru Focus | Diferença |
+|-----------------|-------------------------|---------------|--------|---------------|---------------|------------|-----------|
+|                 |                         |               |        |               |               |            |           |
+| AMD             |  R$ 2.827.000.000,00    | 1.120.000.000 | 2,52   |  R$ 56,88     | 22,53         | 22,19      | -1,55%    |
+| Amazon          |  R$ 62.060.000.000,00   | 504.000.000   | 123,13 |  R$ 3.136,51  | 25,47         | 24,19      | -5,30%    |
+| Alphabet Google |  R$ 201.442.000.000,00  | 698.556.000   | 288,37 |  R$ 1.555,92  | 5,40          | 5,2        | -3,76%    |
+
+*Fonte: Autoria Própria*
+*Acesso em 21/07/2020*
+
+>O P/B quando comparado com o site GuruFocus possui uma pequena diferença, devido ao fato de que provavelmente a GuruFocus calula seu índice na forma TTM (Ultimos 12 meses) enquanto o calculo feito na tabela acima foi baseada em Relatórios Anuais (10-k) de 2019 além do preço das ações possuirem volatilidades afetando o resultado final, portanto podemos dizer que o valor está dentro da margem de erro
+
+
+
 
 
 
