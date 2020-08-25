@@ -39,7 +39,7 @@ CREATE TABLE `company` (
 -- Table structure for table `companyComplement`
 --
 
-DROP TABLE IF EXISTS `companyComplement`;
+DROP TABLE IF EXISTS `companycomplement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `companyComplement` (
@@ -61,6 +61,27 @@ CREATE TABLE `companyComplement` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `content`
+--
+
+DROP TABLE IF EXISTS `content`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `content` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `idfile` int NOT NULL,
+  `content` json NOT NULL,
+  `created` datetime NOT NULL,
+  `createdby` varchar(100) NOT NULL,
+  `updated` datetime DEFAULT NULL,
+  `updatedby` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `content_file_idx` (`idfile`),
+  CONSTRAINT `content_file` FOREIGN KEY (`idfile`) REFERENCES `file` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `country`
 --
 
@@ -69,9 +90,10 @@ DROP TABLE IF EXISTS `country`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `country` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `countrycode` varchar(10) NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +130,6 @@ CREATE TABLE `file` (
   `idform` int DEFAULT NULL,
   `name` varchar(200) DEFAULT NULL,
   `path` varchar(100) DEFAULT NULL,
-  `content` JSON NOT NULL,
   `created` datetime NOT NULL,
   `createdby` varchar(100) NOT NULL,
   `updated` datetime DEFAULT NULL,
@@ -156,6 +177,22 @@ CREATE TABLE `form` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `indexes`
+--
+
+DROP TABLE IF EXISTS `indexes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `indexes` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `evebitda` decimal(8,3) DEFAULT NULL,
+  `es` decimal(8,3) DEFAULT NULL,
+  `pb` decimal(8,3) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `price`
 --
 
@@ -195,7 +232,6 @@ CREATE TABLE `sector` (
 --
 -- Table structure for table `ticker`
 --
-
 DROP TABLE IF EXISTS `ticker`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -225,4 +261,4 @@ CREATE TABLE `ticker` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-29  0:31:30
+-- Dump completed on 2020-08-14  1:28:24
