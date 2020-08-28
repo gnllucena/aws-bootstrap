@@ -70,7 +70,7 @@ DROP TABLE IF EXISTS `content`;
 CREATE TABLE `content` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idfile` int NOT NULL,
-  `content` json NOT NULL,
+  `tags` json NOT NULL,
   `created` datetime NOT NULL,
   `createdby` varchar(100) NOT NULL,
   `updated` datetime DEFAULT NULL,
