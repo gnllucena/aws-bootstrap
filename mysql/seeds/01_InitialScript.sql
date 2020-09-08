@@ -31,7 +31,7 @@ CREATE TABLE `company` (
   `updated` datetime DEFAULT NULL,
   `updatedby` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `idsector` FOREIGN KEY (`id`) REFERENCES `sector` (`id`)
+  CONSTRAINT `idsector_fk` FOREIGN KEY (`id`) REFERENCES `sector` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -42,7 +42,7 @@ CREATE TABLE `company` (
 DROP TABLE IF EXISTS `companycomplement`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `companyComplement` (
+CREATE TABLE `companycomplement` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idcompany` int NOT NULL,
   `idcountry` int NOT NULL,
@@ -55,8 +55,7 @@ CREATE TABLE `companyComplement` (
   PRIMARY KEY (`id`),
   KEY `companycomp_company_idx` (`idcompany`),
   KEY `companycomp_country_idx` (`idcountry`),
-  CONSTRAINT `companycomp_company` FOREIGN KEY (`idcompany`) REFERENCES `company` (`id`),
-  CONSTRAINT `companycomp_country` FOREIGN KEY (`idcountry`) REFERENCES `country` (`id`)
+  CONSTRAINT `companycomp_company_fk` FOREIGN KEY (`idcompany`) REFERENCES `company` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -77,7 +76,7 @@ CREATE TABLE `content` (
   `updatedby` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `content_file_idx` (`idfile`),
-  CONSTRAINT `content_file` FOREIGN KEY (`idfile`) REFERENCES `file` (`id`)
+  CONSTRAINT `content_file_fk` FOREIGN KEY (`idfile`) REFERENCES `file` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -91,7 +90,7 @@ DROP TABLE IF EXISTS `country`;
 CREATE TABLE `country` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
-  `countrycode` varchar(10) NULL,
+  `code` int NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=310 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -112,8 +111,8 @@ CREATE TABLE `exchange` (
   `updated` datetime DEFAULT NULL,
   `updatedby` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `exchange_country_idx` (`idcountry`),
-  CONSTRAINT `exchange_country` FOREIGN KEY (`idcountry`) REFERENCES `country` (`id`)
+  KEY `exchange_country_idx` (`idcountry`)
+  -- CONSTRAINT `exchange_country_fk` FOREIGN KEY (`idcompany`) REFERENCES `country` (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -137,8 +136,8 @@ CREATE TABLE `file` (
   PRIMARY KEY (`id`),
   KEY `id_file_filing_idx` (`idfiling`),
   KEY `id_file_form_idx` (`idform`),
-  CONSTRAINT `id_file_filing` FOREIGN KEY (`idfiling`) REFERENCES `filing` (`id`),
-  CONSTRAINT `id_file_form` FOREIGN KEY (`idform`) REFERENCES `form` (`id`)
+  CONSTRAINT `id_file_filing_fk` FOREIGN KEY (`idfiling`) REFERENCES `filing` (`id`),
+  CONSTRAINT `id_file_form_fk` FOREIGN KEY (`idform`) REFERENCES `form` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -158,7 +157,7 @@ CREATE TABLE `filing` (
   `updatedby` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idcompany_filing_idx` (`idcompany`),
-  CONSTRAINT `idcompany_filing` FOREIGN KEY (`idcompany`) REFERENCES `company` (`id`)
+  CONSTRAINT `idcompany_filing_fk` FOREIGN KEY (`idcompany`) REFERENCES `company` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -211,7 +210,7 @@ CREATE TABLE `price` (
   `updatedby` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `price_ticker_idx` (`idticker`),
-  CONSTRAINT `price_ticker` FOREIGN KEY (`idticker`) REFERENCES `ticker` (`id`)
+  CONSTRAINT `price_ticker_fk` FOREIGN KEY (`idticker`) REFERENCES `ticker` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -239,7 +238,7 @@ CREATE TABLE `ticker` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idcompany` int NOT NULL,
   `idexchange` int NOT NULL,
-  `ticker` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `created` datetime NOT NULL,
   `createdby` varchar(100) NOT NULL,
   `updated` datetime DEFAULT NULL,
@@ -247,8 +246,8 @@ CREATE TABLE `ticker` (
   PRIMARY KEY (`id`),
   KEY `ticker_company_idx` (`idcompany`),
   KEY `ticker_exchange_idx` (`idexchange`),
-  CONSTRAINT `ticker_company` FOREIGN KEY (`idcompany`) REFERENCES `company` (`id`),
-  CONSTRAINT `ticker_exchange` FOREIGN KEY (`idexchange`) REFERENCES `exchange` (`id`)
+  CONSTRAINT `ticker_company_fk` FOREIGN KEY (`idcompany`) REFERENCES `company` (`id`),
+  CONSTRAINT `ticker_exchange_fk` FOREIGN KEY (`idexchange`) REFERENCES `exchange` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
