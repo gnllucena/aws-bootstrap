@@ -17,9 +17,8 @@ develop:
 update:
 
 infra:
-	echo "These aren't the droids you're looking for..."
-	
-run:
 	docker-compose -f docker-compose.yml stop
 	docker-compose -f docker-compose.yml build
 	docker-compose -f docker-compose.yml up
+	
+run:
