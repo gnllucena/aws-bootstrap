@@ -89,15 +89,17 @@ create table file
 (
     id           int auto_increment
         primary key,
-    companyid    int          not null,
-    regulatoryid int          not null,
-    formid       int          not null,
-    name         varchar(200) not null,
-    path         varchar(100) not null,
-    created      datetime     not null,
-    createdby    varchar(100) not null,
-    updated      datetime     null,
-    updatedby    varchar(100) null,
+    companyid       int          not null,
+    regulatoryid    int          not null,
+    formid          int          not null,
+    name            varchar(200) not null,
+    path            varchar(100) not null,
+    periodofreport  datetime not null,
+    filingdate      datetime not null,
+    created         datetime     not null,
+    createdby       varchar(100) not null,
+    updated         datetime     null,
+    updatedby       varchar(100) null,
     constraint file_company_id_fk
         foreign key (companyid) references company (id),
     constraint file_form_fk
