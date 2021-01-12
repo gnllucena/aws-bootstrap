@@ -1,22 +1,22 @@
 version: '2'
 services:
-  # rabbitmq-semnome017:
-  #   container_name: rabbitmq-semnome017
-  #   build: ./rabbitmq/
-  #   ports:
-  #     - "5672:5672"
-  #     - "15672:15672"
+  rabbitmq-semnome017:
+    container_name: rabbitmq-semnome017
+    build: ./local/rabbitmq/
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
-  # redis-semnome017:
-  #   container_name: redis-semnome017
-  #   build: ./redis/
-  #   ports:
-  #     - "6379:6379"
+  redis-semnome017:
+    container_name: redis-semnome017
+    build: ./local/redis/
+    ports:
+      - "6379:6379"
 
   mysql-semnome017:
     container_name: mysql-semnome017
     build:
-      context: ./mysql
+      context: ./local/mysql/
       dockerfile: Dockerfile
     ports:
       - "3306:3306"
