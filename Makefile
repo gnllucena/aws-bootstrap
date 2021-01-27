@@ -1,5 +1,8 @@
 .PHONY: install update run
 
+configure:
+	aws configure
+
 install:
 	git clone https://semnome017@dev.azure.com/semnome017/semnome017/_git/ativos-frontend ../ativos-frontend
 	git clone https://semnome017@dev.azure.com/semnome017/semnome017/_git/ativos-api ../ativos-api
