@@ -10,10 +10,7 @@ namespace Src
         {
             var app = new App();
 
-            var hash = "d12302080c640cf8b80077f0dcdeb7da"; //md5: zro17
-
-            var frontend = "stocks-" + hash;
-            new FrontendStack(app, frontend, "www.zro17.com");
+            new FrontendStack(app, "stocks", "72b302bf297a228a75730123efef7c41", "zro17.com");
 
             app.Synth();
         }

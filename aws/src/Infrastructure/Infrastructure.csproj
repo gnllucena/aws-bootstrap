@@ -7,10 +7,12 @@
 
   <ItemGroup>
     <!-- CDK Construct Library dependencies -->
-    <PackageReference Include="Amazon.CDK" Version="1.86.0" />
-    <PackageReference Include="Amazon.CDK.AWS.IAM" Version="1.86.0" />
-    <PackageReference Include="Amazon.CDK.AWS.S3" Version="1.86.0" />
-    <PackageReference Include="Amazon.CDK.AWS.S3.Deployment" Version="1.86.0" />
+    <PackageReference Include="Amazon.CDK" Version="1.87.1" />
+    <PackageReference Include="Amazon.CDK.AWS.CloudFront.Origins" Version="1.87.1" />
+    <PackageReference Include="Amazon.CDK.AWS.IAM" Version="1.87.1" />
+    <PackageReference Include="Amazon.CDK.AWS.Route53.Targets" Version="1.87.1" />
+    <PackageReference Include="Amazon.CDK.AWS.S3" Version="1.87.1" />
+    <PackageReference Include="Amazon.CDK.AWS.S3.Deployment" Version="1.87.1" />
 
     <!-- jsii Roslyn analyzers (un-comment to obtain compile-time checks for missing required props
     <PackageReference Include="Amazon.Jsii.Analyzers" Version="*" PrivateAssets="all" />
