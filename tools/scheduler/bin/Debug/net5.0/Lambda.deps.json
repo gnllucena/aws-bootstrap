@@ -1,0 +1,110 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "Lambda/1.0.0": {
+        "dependencies": {
+          "AWSSDK.EventBridge": "3.5.4.32",
+          "Amazon.Lambda.CloudWatchEvents": "2.1.0",
+          "Amazon.Lambda.Core": "1.2.0",
+          "Amazon.Lambda.Serialization.SystemTextJson": "2.1.0"
+        },
+        "runtime": {
+          "Lambda.dll": {}
+        }
+      },
+      "Amazon.Lambda.CloudWatchEvents/2.1.0": {
+        "runtime": {
+          "lib/netcoreapp3.1/Amazon.Lambda.CloudWatchEvents.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "Amazon.Lambda.Core/1.2.0": {
+        "runtime": {
+          "lib/netstandard2.0/Amazon.Lambda.Core.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Amazon.Lambda.Serialization.SystemTextJson/2.1.0": {
+        "dependencies": {
+          "Amazon.Lambda.Core": "1.2.0"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Amazon.Lambda.Serialization.SystemTextJson.dll": {
+            "assemblyVersion": "0.0.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "AWSSDK.Core/3.5.3.1": {
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.5.3.1"
+          }
+        }
+      },
+      "AWSSDK.EventBridge/3.5.4.32": {
+        "dependencies": {
+          "AWSSDK.Core": "3.5.3.1"
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.EventBridge.dll": {
+            "assemblyVersion": "3.3.0.0",
+            "fileVersion": "3.5.4.32"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Lambda/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Amazon.Lambda.CloudWatchEvents/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-O6JMGHWod14TSFf8+Cf60b33YP3qXkrXgDboKyJnqKFNqKtZZTHJQcUEtvXBj/TVaxBPrYBcdI51vNAhFUfSww==",
+      "path": "amazon.lambda.cloudwatchevents/2.1.0",
+      "hashPath": "amazon.lambda.cloudwatchevents.2.1.0.nupkg.sha512"
+    },
+    "Amazon.Lambda.Core/1.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-goaq1LaH1UJB18BNG/Apxmn0P7dAlLWFbxU2nKxK+M4lH2KJaZDbtlP2gFEAJ+aENOMBHthaLPEtk3944J2OOg==",
+      "path": "amazon.lambda.core/1.2.0",
+      "hashPath": "amazon.lambda.core.1.2.0.nupkg.sha512"
+    },
+    "Amazon.Lambda.Serialization.SystemTextJson/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-q2R4I77NrrAHDpcaWby9VA/XhE1tjG/2kpredwucRq7k4dTPCqqB7OFmbiFdlfuErrp2/9+X1l62c4unwVicpw==",
+      "path": "amazon.lambda.serialization.systemtextjson/2.1.0",
+      "hashPath": "amazon.lambda.serialization.systemtextjson.2.1.0.nupkg.sha512"
+    },
+    "AWSSDK.Core/3.5.3.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Xjboie+bCfy2hCVDJF9f42issyEtD5QldQG0+m6cu28UVGiKVzxFckXmnglM/2Jyk/jKTooOfcdndWl5Rl/QGw==",
+      "path": "awssdk.core/3.5.3.1",
+      "hashPath": "awssdk.core.3.5.3.1.nupkg.sha512"
+    },
+    "AWSSDK.EventBridge/3.5.4.32": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AJHeuE7dO9LbmT3MQdSEju/VP40zgjGbfYzput4lDUpNkwshINC25iIDhQOW2hBD8bEUTMst4h0FblmMpBimdA==",
+      "path": "awssdk.eventbridge/3.5.4.32",
+      "hashPath": "awssdk.eventbridge.3.5.4.32.nupkg.sha512"
+    }
+  }
+}

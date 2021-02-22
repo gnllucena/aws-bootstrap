@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Infrastructure.Stacks
 {
-    class NetworkStack
+    class ApiStack
     {
     }
 }

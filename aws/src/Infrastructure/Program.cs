@@ -1,6 +1,6 @@
 ﻿using Amazon.CDK;
+using Amazon.CDK.AWS.Events;
 using Infrastructure.Stacks;
-using System;
 
 namespace Src
 {
@@ -10,7 +10,18 @@ namespace Src
         {
             var app = new App();
 
-            new FrontendStack(app, "stocks", "72b302bf297a228a75730123efef7c41", "zro17.com");
+            new FrontendStack(app, "stocks", "zro17.com");
+            new SchedulerStack(app, "regulatory-sec-update", 256, new CronOptions() { 
+                Minute = "*/5",
+                Hour = "*",
+                Day = "*",
+                Month = "*",
+                Year = "*"
+            });
+            new ConsumerStack(app, "regulatory-sec-reader", 256);
+            //new ConsumerStack(app, "regulatory-sec-parser");
+            //new ConsumerStack(app, "calculations-indexes");
+
 
             app.Synth();
         }

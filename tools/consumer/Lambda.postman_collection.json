@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "72f7918e-f56c-42bc-8855-d96e21ba1310",
+		"name": "Lambda SQS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:9000/2015-03-31/functions/function/invocations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Records\": [\r\n        {\r\n            \"Body\": \"{ Id: 1 }\"\r\n        },\r\n        {\r\n            \"Body\": \"{ Id: 2 }\"\r\n        }\r\n    ]\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:9000/2015-03-31/functions/function/invocations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"2015-03-31",
+						"functions",
+						"function",
+						"invocations"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

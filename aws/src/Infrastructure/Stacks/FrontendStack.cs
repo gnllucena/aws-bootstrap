@@ -6,18 +6,17 @@ using Amazon.CDK.AWS.Route53;
 using Amazon.CDK.AWS.Route53.Targets;
 using Amazon.CDK.AWS.S3;
 using Amazon.CDK.AWS.S3.Deployment;
-using System;
 
 namespace Infrastructure.Stacks
 {
     public class FrontendStack : Stack
     {
-        public FrontendStack(Construct scope, string name, string id, string url) : base(scope, string.Concat("frontend-", name))
+        public FrontendStack(Construct scope, string name, string url) : base(scope, string.Concat("frontend-", name))
         {
             var bucketId = string.Concat("frontend-", name, "-bucket");
             var bucket = new Bucket(this, bucketId, new BucketProps()
             {
-                BucketName = name + id,
+                BucketName = name + "72b302bf297a228a75730123efef7c41",
                 WebsiteIndexDocument = "index.html",
                 PublicReadAccess = true,
                 RemovalPolicy = RemovalPolicy.DESTROY
@@ -28,7 +27,7 @@ namespace Infrastructure.Stacks
             {
                 Sources = new[] { Source.Asset("../tools/frontend/") },
                 DestinationBucket = bucket,
-                RetainOnDelete = false,
+                RetainOnDelete = false
             });
 
             var hostedZoneId = string.Concat("frontend-", name, "-hostedzone");
