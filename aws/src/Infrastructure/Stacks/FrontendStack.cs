@@ -11,10 +11,16 @@ namespace Infrastructure.Stacks
 {
     public class FrontendStack : Stack
     {
-        public FrontendStack(Construct scope, string name, string url) : base(scope, string.Concat("frontend-", name))
+        private Bucket _bucket;
+        private BucketDeployment _bucketDeployment;
+        private HostedZone _hostedZone;
+        private Certificate _certificate;
+        private Distribution _distribution;
+        private ARecord _aRecord;
+
+        public FrontendStack(Construct scope, string name, string url, StackProps props = null) : base(scope, $"frontend-{name}", props)
         {
-            var bucketId = string.Concat("frontend-", name, "-bucket");
-            var bucket = new Bucket(this, bucketId, new BucketProps()
+            _bucket = new Bucket(this, $"frontend-{name}-bucket", new BucketProps()
             {
                 BucketName = name + "72b302bf297a228a75730123efef7c41",
                 WebsiteIndexDocument = "index.html",
@@ -22,47 +28,67 @@ namespace Infrastructure.Stacks
                 RemovalPolicy = RemovalPolicy.DESTROY
             });
 
-            var deploymentId = string.Concat("frontend-", name, "-deployment");
-            new BucketDeployment(this, deploymentId, new BucketDeploymentProps()
+            _bucketDeployment = new BucketDeployment(this, $"frontend-{name}-deployment", new BucketDeploymentProps()
             {
                 Sources = new[] { Source.Asset("../tools/frontend/") },
-                DestinationBucket = bucket,
+                DestinationBucket = _bucket,
                 RetainOnDelete = false
             });
 
-            var hostedZoneId = string.Concat("frontend-", name, "-hostedzone");
-            var hostedZone = new HostedZone(this, hostedZoneId, new HostedZoneProps
+            _hostedZone = new HostedZone(this, $"frontend-{name}-hostedzone", new HostedZoneProps
             {
                 ZoneName = url
             });
 
-            var certificateId = string.Concat("frontend-", name, "-certificate");
-            var certificate = new Certificate(this, certificateId, new CertificateProps
+            _certificate = new Certificate(this, $"frontend-{name}-certificate", new CertificateProps
             {
                 DomainName = url,
-                Validation = CertificateValidation.FromDns(hostedZone)
+                Validation = CertificateValidation.FromDns(_hostedZone)
             });
 
-            var distributionId = string.Concat("frontend-", name, "-distribution");
-            var distribution = new Distribution(this, distributionId, new DistributionProps
+            _distribution = new Distribution(this, $"frontend-{name}-distribution", new DistributionProps
             {
                 DefaultBehavior = new BehaviorOptions
                 {
-                    Origin = new S3Origin(bucket),
+                    Origin = new S3Origin(_bucket),
                     ViewerProtocolPolicy = ViewerProtocolPolicy.REDIRECT_TO_HTTPS
                 },
                 DomainNames = new[] { url },
-                Certificate = certificate,
+                Certificate = _certificate,
                 DefaultRootObject = "index.html"
             });
 
-            var aRecordId = string.Concat("frontend-", name, "arecord");
-            new ARecord(this, aRecordId, new ARecordProps
+            _aRecord = new ARecord(this, $"frontend-{name}-arecord", new ARecordProps
             {
-                Zone = hostedZone,
+                Zone = _hostedZone,
                 RecordName = url,
-                Target = RecordTarget.FromAlias(new CloudFrontTarget(distribution))
+                Target = RecordTarget.FromAlias(new CloudFrontTarget(_distribution))
             });
+        }
+
+        public BucketDeployment GetBucketDeployment()
+        {
+            return _bucketDeployment;
+        }
+
+        public HostedZone GetHostedZone()
+        {
+            return _hostedZone;
+        }
+
+        public Certificate GetCertificate()
+        {
+            return _certificate;
+        }
+
+        public Distribution GetDistribution()
+        {
+            return _distribution;
+        }
+
+        public ARecord GetARecord()
+        {
+            return _aRecord;
         }
     }
 }

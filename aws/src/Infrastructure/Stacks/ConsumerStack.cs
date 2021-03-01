@@ -1,4 +1,5 @@
 ﻿using Amazon.CDK;
+using Amazon.CDK.AWS.EC2;
 using Amazon.CDK.AWS.Lambda;
 using Amazon.CDK.AWS.Lambda.EventSources;
 using Amazon.CDK.AWS.Logs;
@@ -8,30 +9,46 @@ namespace Infrastructure.Stacks
 {
     public class ConsumerStack : Stack
     {
-        public ConsumerStack(Construct scope, string name, double memory) : base(scope, string.Concat("consumer-", name))
+        private Function _function;
+        private Queue _queue;
+        private Queue _deadletter;
+
+        public ConsumerStack(Construct scope, string name, double memory, Vpc vpc, StackProps props = null) : base(scope, $"consumer-{name}", props)
         {
-            var lambdaId = string.Concat("consumer-", name, "-lambda");
-            var lambda = new Function(this, lambdaId, new FunctionProps()
+            //  pricing - lambda
+            //    1 milhão de solicitações gratuitas por mês e 
+            //    400.000 GB/segundos de tempo de computação por mês.
+            //
+            //  pricing - sqs
+            //    Primeiro milhão de solicitações/mês - padrao: Gratuito - fifo: Gratuito
+            //    De 1 milhão a 100 bilhões de solicitações mês - padrão: 0,40 USD - fifo: 0,50 USD
+            //    De 100 milhões a 200 bilhões de solicitações/mês - padrão: 0,30 USD - fifo: 0,40 USD
+            //    Mais de 200 bilhões de solicitações/mês - padrão: 0,24 USD - fifo: 0,35 USD
+
+            _function = new Function(this, $"consumer-{name}-lambda", new FunctionProps()
             {
                 FunctionName = name,
                 MemorySize = memory,
-                Runtime = Runtime.FROM_IMAGE,
-                Handler = Handler.FROM_IMAGE,
-                Code = Code.FromAssetImage("../tools/consumer"),
+                Runtime = Runtime.DOTNET_CORE_3_1,
+                Handler = "Lambda::Lambda.Function::Handler",
+                Code = Code.FromAsset("../tools/consumer"),
                 Timeout = Duration.Seconds(20),
-                LogRetention = RetentionDays.ONE_DAY
+                LogRetention = RetentionDays.ONE_DAY,
+                Vpc = vpc,
+                VpcSubnets = new SubnetSelection()
+                {
+                    SubnetType = SubnetType.PRIVATE
+                }
             });
 
-            var deadletterId = string.Concat("consumer-", name, "-deadletter");
-            var deadletter = new Queue(this, deadletterId, new QueueProps()
+            _deadletter = new Queue(this, $"consumer-{name}-deadletter", new QueueProps()
             {
                 QueueName = name + "-deadletter",
                 VisibilityTimeout = Duration.Seconds(30),
-                RetentionPeriod = Duration.Days(10),
+                RetentionPeriod = Duration.Days(10)
             });
-
-            var queueId = string.Concat("consumer-", name, "-queue");
-            var queue = new Queue(this, queueId, new QueueProps()
+;
+            _queue = new Queue(this, $"consumer-{name}-queue", new QueueProps()
             {
                 QueueName = name,
                 VisibilityTimeout = Duration.Seconds(30),
@@ -39,11 +56,26 @@ namespace Infrastructure.Stacks
                 DeadLetterQueue = new DeadLetterQueue()
                 {
                     MaxReceiveCount = 3,
-                    Queue = deadletter
+                    Queue = _deadletter
                 }
             });
 
-            lambda.AddEventSource(new SqsEventSource(queue));
+            _function.AddEventSource(new SqsEventSource(_queue));
+        }
+
+        public Function GetFunction()
+        {
+            return _function;
+        }
+
+        public Queue GeQueue()
+        {
+            return _queue;
+        }
+
+        public Queue GetDeadletter()
+        {
+            return _deadletter;
         }
     }
 }
