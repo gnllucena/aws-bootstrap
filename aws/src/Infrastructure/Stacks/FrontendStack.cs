@@ -20,6 +20,19 @@ namespace Infrastructure.Stacks
 
         public FrontendStack(Construct scope, string name, string url, StackProps props = null) : base(scope, $"frontend-{name}", props)
         {
+            // pricing - hosted zone
+            // 0,50 USD por zona hospedada/mês para as primeiras 25 zonas hospedadas
+            // 0,10 USD por zona hospedada/mês para zonas hospedadas adicionais
+            // Consultas padrão
+            // 0,40 USD por milhão de consultas – primeiro 1 bilhão de consultas/mês
+            // 0,20 USD por milhão de consultas – mais de 1 bilhão de consultas/mês
+            // Consultas de roteamento baseado em latência
+            // 0,60 USD por milhão de consultas – primeiro 1 bilhão de consultas/mês
+            // 0,30 USD por milhão de consultas – mais de 1 bilhão de consultas/mês
+            // Consultas de Geo DNS e geoproximidade
+            // 0,70 USD por milhão de consultas -- primeiro 1 bilhão de consultas/mês
+            // 0,35 USD por milhão de consultas -- mais de 1 bilhão de consultas/mês
+            
             _bucket = new Bucket(this, $"frontend-{name}-bucket", new BucketProps()
             {
                 BucketName = name + "72b302bf297a228a75730123efef7c41",

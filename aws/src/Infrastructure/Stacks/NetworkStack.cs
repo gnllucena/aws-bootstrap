@@ -12,7 +12,7 @@ namespace Infrastructure.Stacks
         {
             _natInstanceProvider = NatProvider.Instance(new NatInstanceProps
             {
-                InstanceType = new InstanceType("t2.micro")                
+                InstanceType = new InstanceType("t2.micro")
             });
 
             _vpc = new Vpc(this, $"network-{name}-vpc", new VpcProps()

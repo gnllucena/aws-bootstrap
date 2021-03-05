@@ -47,7 +47,7 @@ namespace Infrastructure.Stacks
                 {
                     Version = MysqlEngineVersion.VER_8_0_21
                 }),
-                InstanceType = InstanceType.Of(InstanceClass.BURSTABLE3, InstanceSize.MICRO),
+                InstanceType = new InstanceType("t2.micro"),
                 Vpc = vpc,
                 VpcSubnets = new SubnetSelection()
                 {

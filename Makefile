@@ -24,4 +24,5 @@ infra:
 	docker-compose -f docker-compose.yml build
 	docker-compose -f docker-compose.yml up
 	
-run:
+server:
+	cd aws && cdk synth && cdk deploy --all --require-approval never
